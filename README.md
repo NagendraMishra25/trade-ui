@@ -4,9 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 #Details
 
-##Technology used:
-a. Angular
-b. RxJS
+## Technology used:
+a) Angular
+b) RxJS
 
 
 ## Development server
@@ -23,6 +23,6 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng test --code-coverage` to execute the unit tests and see test coverage.
 
-##Assumptions made in application
-a. No refresh when switching between stock and order basket
-b. Web API calls are mocked using local test server
+## Assumptions made in application
+a) No refresh when switching between stock and order basket
+b) Web API calls are mocked using local test server
