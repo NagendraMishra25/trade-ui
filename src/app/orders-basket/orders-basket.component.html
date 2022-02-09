@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-end my-4">
+    <button class="btn btn-primary me-2" (click)="onRemoveClick()" [disabled]="selectedOrders.length === 0">Remove</button>
+    <button class="btn btn-primary" (click)="onBookClick()" [disabled]="isBookingNotAllowed()">Book</button>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Status</th>
+            <th>Side</th>
+            <th>Stock Code</th>
+            <th>Execution Mode</th>
+            <th>Order Price</th>
+            <th>Quantity (Share)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let order of orders">
+            <tr>
+                <td>
+                    <input type="checkbox" class="form-check-input" [id]="order.orderId" [disabled]="order.status === 'In Progress'" (change)="onCheckClick($event, order)">
+                </td>
+                <td><span [class]="getStatusClass(order.status)">{{order.status}}</span></td>
+                <td>{{order.side}}</td>
+                <td>{{order.stockCode}}</td>
+                <td>
+                    <select class="form-control form-select" (change)="onModeChange($event, order)" [value]="order.executionMode" [disabled]="shouldDisable(order)">
+                        <option value="Market">Market</option>
+                        <option value="Limit">Limit</option>
+                      </select>
+                </td>
+                <td>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" placeholder="" [value]="formatNumber(order.price)" aria-label="price" [aria-describedby]="'price-currency'+order.orderId" (change)="onPriceChange($event, order)" [disabled]="order.executionMode === 'Market' || shouldDisable(order)">
+                        <div class="input-group-append">
+                          <span class="input-group-text" [id]="'price-currency'+order.orderId">{{order.stock.currency}}</span>
+                        </div>
+                      </div>
+                </td>
+                <td>
+                   <input type="number" class="form-control" [id]="'quantity'+order.orderId" placeholder="" [value]="order.quantity || ''" (change)="onQuantityChange($event, order)" [disabled]="shouldDisable(order)">
+                </td>
+            </tr>
+            <tr *ngIf="order.error">
+                <td colspan="7">
+                    <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between" role="alert">
+                        <div>{{order.error}}</div>
+                        <div><button type="button" class="close btn btn-light" data-dismiss="alert" aria-label="Close" (click)="order.error = undefined">
+                          Close
+                        </button>
+                        </div>
+                      </div>
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>

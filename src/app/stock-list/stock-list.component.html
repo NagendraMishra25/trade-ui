@@ -1,0 +1,31 @@
+<div *ngIf="isLoading" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<ng-container *ngIf="!isLoading && stocks.length > 0">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Stock Code</th>
+                <th>Market Price</th>
+                <th>Currency</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let stock of stocks">
+                <tr>
+                    <td>{{stock.bloombergTicker}}</td>
+                    <td>{{stock.price}}</td>
+                    <td>{{stock.currency}}</td>
+                    <td>
+                        <button class="btn btn-primary me-3" (click)="onBuyClick(stock)">Buy</button>
+                        <button class="btn btn-secondary" (click)="onSellClick(stock)">Sell</button>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</ng-container>
