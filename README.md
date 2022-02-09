@@ -8,10 +8,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 a) Angular
 b) RxJS
 
+## Install dependencies
+Move to project root directory and run `npm install` to install all dependecies.
 
 ## Development server
 
 Run `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+Run `npm run mock` to start ng-rest server to feed the api responses.
 
 ## Build
 
